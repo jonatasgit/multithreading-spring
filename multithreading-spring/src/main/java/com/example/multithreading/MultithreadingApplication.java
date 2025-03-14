@@ -9,9 +9,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @SpringBootApplication
 public class MultithreadingApplication {
 
@@ -22,18 +19,35 @@ public class MultithreadingApplication {
 	@Bean
 	CommandLineRunner enrichRooms(final RoomRepository roomRepository, final SeatRepository seatRepository){
 		return args -> {
-			Seat seat1 = new Seat();
-			Seat seat2 = new Seat();
-			Room room1 = new Room();
-			List<Seat> seatList = new ArrayList<>();
-			seatList.add(seat1);
-			seatList.add(seat2);
+			//initDb(roomRepository);
 
-			room1.setSeatList(seatList);
-
-			roomRepository.save(room1);
-			seatRepository.save(seat1);
-
+			System.out.println(seatRepository.findByIdAndRoomId(2L, 1L).get().isAssigned());
 		};
+	}
+
+	private static void initDb(RoomRepository roomRepository) {
+		Seat seat1 = new Seat();
+		Seat seat2 = new Seat();
+		Seat seat3 = new Seat();
+		Seat seat4 = new Seat();
+		Seat seat5 = new Seat();
+		Seat seat6 = new Seat();
+		Seat seat7 = new Seat();
+		Seat seat8 = new Seat();
+		Seat seat9 = new Seat();
+		Room room1 = new Room();
+		Room room2 = new Room();
+
+		room1.addSeat(seat1);
+		room1.addSeat(seat2);
+		room1.addSeat(seat3);
+		room1.addSeat(seat4);
+		room1.addSeat(seat5);
+		room1.addSeat(seat6);
+		room1.addSeat(seat7);
+		room1.addSeat(seat8);
+		room2.addSeat(seat9);
+		roomRepository.save(room1);
+		roomRepository.save(room2);
 	}
 }
