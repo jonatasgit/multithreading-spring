@@ -1,5 +1,6 @@
 package com.example.multithreading.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,7 +18,12 @@ public class Seat {
 
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = false)
+    @JsonIgnore
     private Room room;
+
+    //Optimistic Locking, either thread who can access and commit first will be definitive
+    @Version
+    private Integer version;
 
     public Long getId() {
         return id;

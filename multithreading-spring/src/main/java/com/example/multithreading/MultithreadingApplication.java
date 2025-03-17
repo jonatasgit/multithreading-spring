@@ -19,7 +19,7 @@ public class MultithreadingApplication {
 	@Bean
 	CommandLineRunner enrichRooms(final RoomRepository roomRepository, final SeatRepository seatRepository){
 		return args -> {
-			//initDb(roomRepository);
+			initDb(roomRepository);
 
 			System.out.println(seatRepository.findByIdAndRoomId(2L, 1L).get().isAssigned());
 		};
